@@ -1,0 +1,71 @@
+﻿@model ReflectionIT.Mvc.Paging.IPagingList<Pedido>
+
+@{
+    Func<string, string> mask = (tel) => long.Parse(tel).ToString("(##) #####-####"); 
+}
+<section class="container">
+
+<form method="get" class="form-control mt-3">
+    <div class="mb-3">       
+        <input name="filter" class="form-control" placeholder="filtro" value="@Model.RouteValue["filter"]"/>
+        <button type="submit" class="btn btn-info mt-2">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+
+</form>
+
+
+<p class="mt-3">
+    <a asp-action="Create" class="btn btn-success"><i class="fa-solid fa-file-circle-plus"></i> - Novo</a>
+</p>
+
+    <table class="table">
+        <thead >
+            <tr class="text-center">
+                <th scope="col">Nome comleto</th>
+                @* <th scope="col">Sobrenome</th> *@
+                <th scope="col">Endereço</th>
+                <th scope="col">Cidade</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Pedido Total</th>
+                <th scope="col">Total de iten do Pedido</th>
+                <th scope="col">Data do Envio</th>
+                <th scope="col">Data da Entrega</th>
+                <th scope="col">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr class="text-center align-baseline">
+                    <th scope="row">@item.Nome @item.Sobrenome </th>
+                    @* <td>@Html.DisplayFor(modelItem => item.Sobrenome)</td> *@
+                    <td>@Html.DisplayFor(modelItem => item.Endereco)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                    <td>@mask(item.Telefone)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PedidoTotal)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalItensPedido)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PedidoEnviado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PedidoEntregueEm)</td>
+                    <td class="d-flex justify-content-center align-items-center">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary "><i class="fa fa-edit"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning me-2 ms-2"><i class="fa fa-circle-info"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger "><i class="fa fa-trash"></i></a>
+                    </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+<p>Total de pedidos: @Model.TotalRecordCount</p>
+<div>
+    <vc:pager paging-list="@Model"></vc:pager>
+</div>
+</section>
+
+

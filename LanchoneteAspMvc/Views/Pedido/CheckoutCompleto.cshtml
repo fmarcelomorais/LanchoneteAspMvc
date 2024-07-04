@@ -1,0 +1,54 @@
+﻿@model Pedido
+<section class="container">
+
+<div >
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">@ViewBag.CheckoutCompletoMessagem</h1>
+        </div>
+    </div>
+</div>
+<br />
+<div class="card">
+    <div class="card-body">
+       <h4>Cliente: <strong>@Model.Nome @Model.Sobrenome</strong></h4>
+       <p>Data do Pedido: <strong>@Model.PedidoEnviado</strong></p>
+        @{
+            var codigoPedido = Model.Id.ToString().Replace(".", " ").Substring(0, 8).ToUpper();
+            var totalPedido = ViewBag.TotalPedido.ToString("C2");
+        }
+            <p>Código do Pedido: <strong class="h4">@codigoPedido</strong> </p>
+    </div>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Quantidade</th>
+            <th>Item</th>
+            <th>Preço</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.PedidoDetalhes)
+        {
+            <tr>
+                <td><img src="@item.Lanche.ThumbnailUrl" width="40" height="40" /></td>
+                <td>@item.Quantidade</td>
+                <td>@item.Lanche.Nome</td>
+                <td>@item.Lanche.Preco</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<h4>Total do Pedido: <strong>@totalPedido</strong></h4>
+<hr />
+<a class="btn btn-close-white"
+    asp-controller="Home"
+    asp-action="Index"
+>
+Retornar
+</a>
+</section>

@@ -1,0 +1,33 @@
+﻿@inject SignInManager<IdentityUser> SignInManager;
+
+@if(SignInManager.IsSignedIn(User))
+{
+    
+    <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" 
+        method="post" class="navbar-left">
+        <ul class="nav navbar-nav navbar-left">
+            <button type="submit" style="width:auto" class="nav-link btn btn-link py-0">
+                Logout : @User.Identity.Name 
+            </button>
+        </ul>
+    </form>
+
+}
+else
+{
+    <ul class="d-flex text-center">
+        @{
+            var path = Context.Request.Path;
+            var url = Context.Request.QueryString;
+            var returnUrl = string.Format(" {0}{1}", path, url);
+        }
+        <a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@returnUrl"
+            class="nav-link text-ligth" >
+            Login
+        </a>
+        <a asp-controller="Account" asp-action="Register" 
+            class="nav-link text-ligth" >
+            Cadastrar
+        </a>
+    </ul>
+}

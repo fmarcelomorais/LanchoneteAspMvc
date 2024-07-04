@@ -1,0 +1,66 @@
+﻿@model ReflectionIT.Mvc.Paging.IPagingList<Lanche>
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+
+<div class="container mt-3">
+
+<form method="get" class="form-control">
+
+    <div class="mt-3 mb-3">       
+        <input name="filter" class="form-control" placeholder="filtro" value="@Model.RouteValue["filter"]"/>
+        <button type="submit" class="btn btn-info mt-2">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+</form>
+
+<p class="mt-3">
+    <a asp-action="Create" class="btn btn-success"><i class="fa-solid fa-file-circle-plus"></i> - Novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr class="text-center align-baseline">
+            <th>Thumbnail</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Descrição Curta</th>
+            <th>Descrição</th>
+            @* <th>Foto</th> *@
+            <th>Preferido?</th>
+            <th>Disponível?</th>
+            <th>Categoria</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr class="text-center align-baseline">
+            <td><img src="@Html.DisplayFor(modelItem => item.ThumbnailUrl)" width="50px"/> </td>
+            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.Preco)</td>
+            <td>@Html.DisplayFor(modelItem => item.DescricaoCurta)</td>
+            <td>@Html.DisplayFor(modelItem => item.DescricaoLonga)</td>
+           @*  <td><img src="@Html.DisplayFor(modelItem => item.ImagemUrl)" width="100px" /></td> *@
+            <td>@Html.DisplayFor(modelItem => item.Preferido)</td>
+            <td>@Html.DisplayFor(modelItem => item.Disponivel)</td>
+            <td>@Html.DisplayFor(modelItem => item.Categoria.Nome)</td>
+
+            <td class="d-flex justify-content-between align-items-center">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning me-2 ms-2"><i class="fa fa-circle-info"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<p>Total de pedidos: @Model.TotalRecordCount</p>
+<div>
+    <vc:pager paging-list="@Model"></vc:pager>
+</div>
+
+</div>

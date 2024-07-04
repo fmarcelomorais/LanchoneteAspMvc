@@ -1,0 +1,42 @@
+﻿@{
+      string indisponivel = Model.Disponivel ? "" : "disabled";
+  }
+
+<section class="detalhes-lanche">
+
+    <div class="card">
+        <picture class="image-card">
+            <img src="@Model.ImagemUrl" class="card-img-top" alt="@Model.Nome">
+        </picture>
+        <div class="card-body">
+            <h4 class="card-title">@Model.Nome</h4>
+            <h3 class="card-title">@Model.Preco.ToString("C")</h3>
+            <p class="card-text">@Model.DescricaoCurta</p>
+         </div>
+   
+        <div class="card-footer">
+            @if (!Model.Disponivel)
+            {
+              
+                    <p class="h2 text-info">
+                    <i class="fa-solid fa-face-sad-tear"></i>
+                        Indisponivel
+                    </p>
+              
+            }
+            else
+            {
+                
+                <a class="btn btn-success" id="cartButton"
+                   asp-controller="Carrinho"
+                   asp-action="AdicionarItem"
+                   asp-route-lancheId="@Model.Id"
+                >Adicionar</a>
+            }
+
+        </div>
+    </div>
+    
+</section>
+
+                    

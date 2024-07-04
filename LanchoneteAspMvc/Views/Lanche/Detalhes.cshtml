@@ -1,0 +1,20 @@
+﻿
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="@Model.ThumbnailUrl" alt="Imagem de capa do card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Nome</h5>
+        <h3 class="text-primary">@Model.Preco.ToString("C")</h3>
+        <p class="card-text">@Model.DescricaoLonga.</p>
+        <a asp-controller="Lanche"
+           asp-action="Catalogo"
+           class="btn btn-info">
+            Voltar
+       </a>
+        <a asp-controller ="Carrinho"
+           asp-action="AdicionarItem"
+           asp-route-lancheId="@Model.Id" 
+           class="btn btn-primary">
+           Adicionar
+       </a>
+    </div>
+</div>

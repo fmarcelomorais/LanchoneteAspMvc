@@ -1,0 +1,15 @@
+﻿@model CarrinhoViewModel
+
+@{
+    if(Model.Carrinho.Itens.Any())
+    {
+         
+        <a asp-controller="Carrinho" asp-action="Index" class="btn btn-info fs-5">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="text-black fw-bold ">
+                @Model.Carrinho.Itens.Count
+            </span>
+        </a>
+
+    }
+}

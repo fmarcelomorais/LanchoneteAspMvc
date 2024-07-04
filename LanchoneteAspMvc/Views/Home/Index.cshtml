@@ -1,0 +1,23 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    
+}
+
+
+<h2>Mais pedidos da semana.</h2>
+
+<div class="mt-5 mb-5">
+    <partial name="_FormBuscaLanches" />
+</div>
+<hr />
+<div class="catalogo">
+
+    @foreach(var item in Model.LanchesPreferidos)
+    {
+        <partial name="_DetalhesLanche" for="@item" />
+           
+    }
+</div>
+
+
