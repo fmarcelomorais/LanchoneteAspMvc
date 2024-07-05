@@ -24,14 +24,13 @@
         <thead >
             <tr class="text-center">
                 <th scope="col">Nome comleto</th>
-                @* <th scope="col">Sobrenome</th> *@
                 <th scope="col">Endereço</th>
                 <th scope="col">Cidade</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Telefone</th>
                 <th scope="col">E-mail</th>
-                <th scope="col">Pedido Total</th>
-                <th scope="col">Total de iten do Pedido</th>
+                <th scope="col">Total</th>
+                <th scope="col">itens do Pedido</th>
                 <th scope="col">Data do Envio</th>
                 <th scope="col">Data da Entrega</th>
                 <th scope="col">Ação</th>
@@ -42,14 +41,18 @@
             {
             <tr class="text-center align-baseline">
                     <th scope="row">@item.Nome @item.Sobrenome </th>
-                    @* <td>@Html.DisplayFor(modelItem => item.Sobrenome)</td> *@
                     <td>@Html.DisplayFor(modelItem => item.Endereco)</td>
                     <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
                     <td>@Html.DisplayFor(modelItem => item.Estado)</td>
                     <td>@mask(item.Telefone)</td>
                     <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                    <td>@Html.DisplayFor(modelItem => item.PedidoTotal)</td>
-                    <td>@Html.DisplayFor(modelItem => item.TotalItensPedido)</td>
+                    <td>@item.PedidoTotal.ToString("C")</td>
+                    <td>
+                        <a asp-action="PedidoLanche" asp-route-id="@item.Id" 
+                            name="id" class="btn btn-primary">
+                            @item.TotalItensPedido
+                        </a>
+                    </td>
                     <td>@Html.DisplayFor(modelItem => item.PedidoEnviado)</td>
                     <td>@Html.DisplayFor(modelItem => item.PedidoEntregueEm)</td>
                     <td class="d-flex justify-content-center align-items-center">
@@ -67,5 +70,7 @@
     <vc:pager paging-list="@Model"></vc:pager>
 </div>
 </section>
+
+
 
 

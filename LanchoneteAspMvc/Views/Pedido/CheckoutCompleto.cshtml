@@ -11,13 +11,13 @@
 <br />
 <div class="card">
     <div class="card-body">
-       <h4>Cliente: <strong>@Model.Nome @Model.Sobrenome</strong></h4>
-       <p>Data do Pedido: <strong>@Model.PedidoEnviado</strong></p>
         @{
             var codigoPedido = Model.Id.ToString().Replace(".", " ").Substring(0, 8).ToUpper();
             var totalPedido = ViewBag.TotalPedido.ToString("C2");
         }
-            <p>Código do Pedido: <strong class="h4">@codigoPedido</strong> </p>
+       <p>Código do Pedido: <strong class="h4">@codigoPedido</strong> </p>
+       <h4>Cliente: <strong>@Model.Nome @Model.Sobrenome</strong></h4>
+       <p>Data do Pedido: <strong>@Model.PedidoEnviado</strong></p>
     </div>
 </div>
 <br />

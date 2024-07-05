@@ -1,0 +1,57 @@
+﻿@model LanchoneteAspMvc.ViewModels.PedidoLancheVM
+
+@{
+    var pedido = Model.Pedido;
+    var lanche = Model.PedidoDetalhes;
+}
+<section class="container">
+    <section class="row mt-4">
+        <div class="col-6">
+            <h3 >Dados do Pedido</h3>
+        </div> 
+        <div class="col-6 text-end">
+            <a asp-action="Index" class="btn btn-outline-primary"><i class="fa-solid fa-reply"></i></a>
+        </div>
+ 
+    </section>
+    <hr />
+    <h4>Código: @pedido.Id.ToString().Replace(".", " ").Substring(0,8).ToUpper()</h4>
+    <br />
+    <p class="h5 ">Cliente: @pedido.Nome</p>
+    <p class="h5 ">Data: @pedido.PedidoEnviado</p>
+    <p class="h5 ">Entrega: @pedido.PedidoEntregueEm</p>
+    <hr />
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Categoria</th>
+                    <th>Lanche</th>
+                    <th>Preço</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach(var item in lanche)
+            {
+                <tr>
+                    <td>@item.Lanche.Categoria.Nome</td>
+                    <td><img src="@item.Lanche.ImagemUrl" width="50px" /></td>
+                    <td>@item.Lanche.Preco.ToString("C") (@item.Quantidade)</td>
+                    @{
+                        var subtotal = item.Lanche.Preco * item.Quantidade;
+                    }
+                    <td>@subtotal.ToString("C")</td>
+
+                </tr>
+            }
+            </tbody>
+        </table>
+
+    <div class="row">
+        <div class="col-12 text-end">
+            <span class="h5">Total do Pedido: @pedido.PedidoTotal.ToString("C") </span>
+        </div>
+    </div>
+
+</section>

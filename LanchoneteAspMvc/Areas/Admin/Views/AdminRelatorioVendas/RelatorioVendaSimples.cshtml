@@ -1,0 +1,70 @@
+﻿@model IEnumerable<LanchoneteAspMvc.Models.Pedido>
+
+@{
+    var dataInicial = ViewBag.MinDate;
+    var dataFinal = ViewBag.MaxDate;
+}
+    <section class="container">
+        <h2>Pedido por Período</h2>
+  
+        <nav class="navbar navbar-dark">
+            <div class="container-fluid">
+            <form class="row mt-4" asp-action="RelatorioVendaSimples">
+                <div class="col-auto">
+                    <label class="visually-hidden" for="autoSizingInput">Data Inicio</label>
+                    <input type="date" 
+                        name="minDate" 
+                        value="@dataInicial"
+                        class="form-control" 
+                        id="autoSizingInput">
+                </div>
+                <div class="col-auto">
+                    <label class="visually-hidden" for="autoSizingInput">Data Final</label>
+                    <input type="date" 
+                        name="maxDate"
+                        value="@dataFinal"
+                        class="form-control" id="autoSizingInput">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </form>
+            </div>
+        </nav>
+        <hr />
+        <div class="panel panel-primary">
+            <div class="panel panel-heading">
+                <h3 class="panel-title">Total Pedidos @Model.Count()</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Total do Pedido</th>
+                            <th>Itens do Pedido</th>
+                            <th>Data envio Pedido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id.ToString().Replace(".", " ").Substring(0,8).ToUpper()</td>
+                            <td>@item.Nome</td>
+                            <td>@item.Email</td>
+                            <td>@item.Telefone</td>
+                            <td>@item.PedidoTotal</td>
+                            <td>@item.TotalItensPedido</td>
+                            <td>@item.PedidoEnviado</td>
+                        </tr>
+                        
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>

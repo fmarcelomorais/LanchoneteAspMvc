@@ -1,0 +1,17 @@
+﻿<section class="container">
+    <h3>Relatório de Pedidos por Período</h3>
+    <form class="row mt-4" asp-action="RelatorioVendaSimples">
+        <div class="col-auto">
+            <label class="visually-hidden" for="min">Data Inicio</label>
+            <input type="date" name="minDate" class="form-control" id="autoSizingInput">
+        </div>
+        <div class="col-auto">
+            <label class="visually-hidden" for="max">Data Final</label>
+            <input type="date" name="maxDate" class="form-control" id="autoSizingInput">
+        </div>
+        <div class="col-auto">
+   
+            <button type="submit" class="btn btn-primary">Abrir Relatório</button>
+        </div>
+    </form>
+</section>
