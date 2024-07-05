@@ -1,4 +1,5 @@
 ﻿using LanchoneteAspMvc.Areas.Admin.Repositories;
+using LanchoneteAspMvc.Areas.Admin.Services;
 using LanchoneteAspMvc.Controllers;
 using LanchoneteAspMvc.Data.Context;
 using LanchoneteAspMvc.Data.Interfaces;
@@ -41,6 +42,7 @@ namespace LanchoneteAspMvc.IoC
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();
             services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+            services.AddScoped<RelatorioVendasServices>();
 
             services.AddAuthorization(options =>
             {

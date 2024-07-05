@@ -10,6 +10,7 @@ using LanchoneteAspMvc.Models;
 using LanchoneteAspMvc.Data.Interfaces;
 using LanchoneteAspMvc.Areas.Admin.Repositories;
 using ReflectionIT.Mvc.Paging;
+using LanchoneteAspMvc.ViewModels;
 
 namespace LanchoneteAspMvc.Areas.Admin.Controllers
 {
@@ -29,6 +30,30 @@ namespace LanchoneteAspMvc.Areas.Admin.Controllers
         //    var pedidos = await _pedidoRepository.GetAll();
         //    return View(pedidos);
         //}
+
+        public IActionResult PedidoLanche(Guid id)
+        {
+             var pedidoLanche = _pedidoRepository.RetornaContext()
+                    .Pedidos
+                    .Include(p => p.PedidoDetalhes)
+                    .ThenInclude(p => p.Lanche)
+                    .ThenInclude(p => p.Categoria)
+                    .FirstOrDefault(p => p.Id == id);
+            if (pedidoLanche == null)
+            {
+                Response.StatusCode = 404;
+                return View("PedidoNotFound", id);
+            }
+            PedidoLancheVM pedidoLancheVM = new PedidoLancheVM()
+            {
+                Pedido = pedidoLanche,
+                PedidoDetalhes = pedidoLanche.PedidoDetalhes
+            };
+
+            return View(pedidoLancheVM);
+
+        }
+               
 
         public async Task<IActionResult> Index(string filter, int pageindex = 1, string sort = "Nome")
         {
@@ -165,5 +190,7 @@ namespace LanchoneteAspMvc.Areas.Admin.Controllers
             var pedido = await _pedidoRepository.Get(id);
             return pedido == null ? true : false;
         }
+    
+        
     }
 }
