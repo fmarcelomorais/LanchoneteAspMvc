@@ -47,6 +47,7 @@
                             <th>Total do Pedido</th>
                             <th>Itens do Pedido</th>
                             <th>Data envio Pedido</th>
+                            <th>Data entrega</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,9 +58,10 @@
                             <td>@item.Nome</td>
                             <td>@item.Email</td>
                             <td>@item.Telefone</td>
-                            <td>@item.PedidoTotal</td>
+                            <td>@item.PedidoTotal.ToString("C")</td>
                             <td>@item.TotalItensPedido</td>
                             <td>@item.PedidoEnviado</td>
+                            <td>@item.PedidoEntregueEm</td>
                         </tr>
                         
                     }

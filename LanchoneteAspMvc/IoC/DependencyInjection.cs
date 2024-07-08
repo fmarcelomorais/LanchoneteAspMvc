@@ -23,6 +23,7 @@ namespace LanchoneteAspMvc.IoC
                 .AddEntityFrameworkStores<LanchoneteContext>()
                 .AddDefaultTokenProviders();
 
+            services.Configure<ConfigurationImage>(configuration.GetSection("ConfigurationPathImage"));
             ////services.Configure<IdentityOptions>(options =>
             ////{
             ////    // Default password settings
