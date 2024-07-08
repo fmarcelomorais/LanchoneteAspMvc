@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\images\produtos\" />
   </ItemGroup>
 
 </Project>

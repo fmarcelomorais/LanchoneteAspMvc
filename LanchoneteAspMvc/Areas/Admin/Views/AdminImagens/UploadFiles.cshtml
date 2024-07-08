@@ -1,0 +1,38 @@
+﻿@{
+    var listaDeImagens = ViewBag.Arquivos;
+    ViewData["Title"] = "Upload de Imagens";
+    var erro = ViewData["Erro"];
+    var resultado = ViewData["Resultado"];
+}
+
+
+@if(erro != null)
+{    
+    <h4>@erro</h4>
+}
+else
+{
+    <script>
+        alert(resultado)
+    </script>
+    <h4>@resultado</h4>
+    <h3>Imagens Enviadas</h3>
+    <hr />
+    <table class="table">
+        <tr>
+            <td>Caminho</td>
+        </tr>
+    @foreach(string imagem in listaDeImagens)
+    {
+        <tr>  
+            <td>
+                @imagem
+            </td>
+        </tr>
+    }
+    </table>
+}
+
+
+
+
