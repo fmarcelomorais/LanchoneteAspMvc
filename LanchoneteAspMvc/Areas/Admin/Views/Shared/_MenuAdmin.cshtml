@@ -24,7 +24,20 @@
                     <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminRelatorioVendas" asp-action="Index">Relatórios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-warning" asp-area="Admin" asp-controller="AdminImagens" asp-action="Index">Gerenciar Imagens</a>
+                    <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminImagens" asp-action="Index">Gerenciar Imagens</a>
+                </li>
+                <li class="nav-item">
+                    @* <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminImagens" asp-action="Index">Graficos de Vendas</a> *@
+                    <div class="dropdown">
+                        <button class="nav-link text-light dropdown-toggle" type="button" id="dropdownGraficos" data-bs-toggle="dropdown" aria-expanded="false">
+                            Gráficos de Vendas
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownGraficos">
+                            <li><a class="dropdown-item" asp-area="Admin" asp-controller="AdminGrafico" asp-action="VendasSemanal" asp-route-dias="7">Semanal</a></li>
+                            <li><a class="dropdown-item" asp-area="Admin" asp-controller="AdminGrafico" asp-action="VendasMensal" asp-route-dias="30">Mensal</a></li>
+                            <li><a class="dropdown-item" asp-area="Admin" asp-controller="AdminGrafico" asp-action="Index">Anual</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-warning" asp-area="" asp-controller="Home" asp-action="Index">Sair</a>

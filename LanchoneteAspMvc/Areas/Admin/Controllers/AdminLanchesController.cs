@@ -9,6 +9,8 @@ using LanchoneteAspMvc.Data.Context;
 using LanchoneteAspMvc.Models;
 using LanchoneteAspMvc.Data.Interfaces;
 using ReflectionIT.Mvc.Paging;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace LanchoneteAspMvc.Areas.Admin.Controllers
 {
@@ -16,10 +18,14 @@ namespace LanchoneteAspMvc.Areas.Admin.Controllers
     public class AdminLanchesController : Controller
     {
         private readonly ILancheRepository _context;
+        private readonly ConfigurationImage _configureImage;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public AdminLanchesController(ILancheRepository context)
+        public AdminLanchesController(ILancheRepository context, IOptions<ConfigurationImage> configureImage, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _configureImage = configureImage.Value;
+            _webHostEnvironment = webHostEnvironment;
         }
 
        
@@ -64,8 +70,32 @@ namespace LanchoneteAspMvc.Areas.Admin.Controllers
         public async Task<IActionResult> Create()
         {
             var lista = _context.RetornaContext().Categorias.ToList();
-  
+            
             ViewData["CategoriaId"] = new SelectList(lista, "Id", "Nome");
+
+            FileManagerModel model = new FileManagerModel();
+            var userImagePath = Path.Combine(_webHostEnvironment.WebRootPath, _configureImage.NomePastaImagensProduto);
+
+            DirectoryInfo dir = new DirectoryInfo(userImagePath);
+            FileInfo[] files = dir.GetFiles();
+
+            model.PathImageProdutos = _configureImage.NomePastaImagensProduto;
+            if (files.Length == 0)
+            {
+                ViewData["Error"] = $"Nenhum arquivo encontrado em {userImagePath}";
+            }
+
+            model.Files = files;
+
+            List<string> caminhoImagem = new List<string>();
+
+            foreach (var file in files)
+            {
+                caminhoImagem.Add(file.FullName);
+            }
+
+            ViewData["Lista"] = new SelectList(files, "FullName", "FullName");
+
             return View();
         }
 
@@ -73,6 +103,7 @@ namespace LanchoneteAspMvc.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nome,Preco,DescricaoCurta,DescricaoLonga,ImagemUrl,ThumbnailUrl,Preferido,Disponivel,CategoriaId,Id")] Lanche lanche)
         {
+
             if (ModelState.IsValid)
             {
                 lanche.Id = Guid.NewGuid();
@@ -99,6 +130,7 @@ namespace LanchoneteAspMvc.Areas.Admin.Controllers
             }
             var lista = new SelectList( _context.ReturaLista(), "Id", "Nome", lanche.CategoriaId);
             ViewBag.CategoriaId = lista;
+
             return View(lanche);
         }
 

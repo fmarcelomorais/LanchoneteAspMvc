@@ -4,7 +4,7 @@
 
 <section class="detalhes-lanche">
 
-    <div class="card">
+    <div class="card border-0">
         <picture class="image-card">
             <img src="@Model.ImagemUrl" class="card-img-top" alt="@Model.Nome">
         </picture>
@@ -18,7 +18,7 @@
             @if (!Model.Disponivel)
             {
               
-                    <p class="h2 text-info">
+                    <p class="h4 text-info">
                     <i class="fa-solid fa-face-sad-tear"></i>
                         Indisponivel
                     </p>

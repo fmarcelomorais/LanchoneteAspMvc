@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Gráfico de Vendas";
+}
+
+<title >
+    @ViewData["Title"]
+</title>
+
+<h2>Gráfico de vendas Anual</h2>
+<hr />
+<section class="container" >
+    <div id="grafico"></div>
+</section>
+
+ 
+<script>
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(carregaDados);
+    async function carregaDados() {
+
+        const url = '@Url.Action("VendasLanches", "AdminGrafico", new { dias = 360})';
+ 
+        const requisicao = await fetch(url)
+        const dados = await requisicao.json();
+        console.log(dados)
+        let informacoesGrafico = [
+            ["Nome", "Quantidade", "Valores(R$)", { role: 'style' }]
+        ]
+        $.each(dados, (i, item) => {
+            informacoesGrafico.push([item.nome, item.quantidade, item.valorTotal, `color: #${i}8F5FF`]);
+        });
+
+        geraGrafico(informacoesGrafico);
+
+    }
+
+    function geraGrafico(dados) {
+
+        let view = google.visualization.arrayToDataTable(dados);
+
+        const options = {
+            width: '1000',
+            height: '400',
+            bar: { groupWidth: '75%' },
+            isStacked: true,
+            'legend': 'left',
+            'is3D': true,
+
+        }
+        
+        const grafico = new google.visualization.BarChart(document.getElementById("grafico"));
+
+        grafico.draw(view, options)
+
+    }
+</script>
+
+
+

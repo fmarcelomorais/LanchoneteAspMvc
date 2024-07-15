@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Admin";
+  
 }
 
 <section class="container">
@@ -35,13 +36,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="ImagemUrl" class="control-label"></label>
-                <input asp-for="ImagemUrl" class="form-control" />
+                @* <input asp-for="ImagemUrl" class="form-control" /> *@                    
+                    <select asp-for="ImagemUrl" class="form-control" asp-items="ViewBag.Lista"></select>
+                  
                 <span asp-validation-for="ImagemUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ThumbnailUrl" class="control-label"></label>
-                <input asp-for="ThumbnailUrl" class="form-control" />
-                <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
+                @* <input asp-for="ThumbnailUrl" class="form-control" /> *@
+                   <option selected>Caminho da imagem</option>
+                    <select asp-for="ThumbnailUrl" class="form-control" asp-items="ViewBag.Lista"></select>
+                    </select>
+                    <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -59,10 +65,44 @@
             </div>
             <div class="form-group mt-3">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-outline-primary"><i class="fa-solid fa-reply"></i></a>
+                <a asp-action="Index" class="btn btn-outline-primary salvar"><i class="fa-solid fa-reply"></i></a>
             </div>
         </form>
     </div>
 </div>
 
 </section>
+
+<script type="module">    
+    
+
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js'
+    import { getStorage, ref, uploadBytes } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-storage.js'
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAfkqNcYzuE0nNoImEqvTfCH4DTgBwQ8i8",
+        authDomain: "lanchonete-30a36.firebaseapp.com",
+        projectId: "lanchonete-30a36",
+        storageBucket: "lanchonete-30a36.appspot.com",
+        messagingSenderId: "323973295391",
+        appId: "1:323973295391:web:4dcb8b76bcc4aa28ab542a"
+    };
+
+    $(".salvar").click(function (e) {
+        debugger
+        e.preventDefault();
+        const caminho = $("ImagemUrl").val();
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage();
+
+        const spaceRef = ref(storage, 'imagens/'+caminho);
+        uploadBytes(spaceRef, file).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+        });
+
+    })
+ 
+
+    
+</script>

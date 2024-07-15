@@ -44,6 +44,7 @@ namespace LanchoneteAspMvc.IoC
             services.AddTransient<IPedidoRepository, PedidoRepository>();
             services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
             services.AddScoped<RelatorioVendasServices>();
+            services.AddScoped<GraficoVendasService>();
 
             services.AddAuthorization(options =>
             {

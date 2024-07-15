@@ -7,9 +7,11 @@
     <title>@ViewData["Title"] - Lanchonete</title>
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-          crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+        crossorigin="anonymous" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
           integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
           crossorigin="anonymous"
@@ -19,30 +21,88 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
 </head>
-<body>
+<body>    
     <div class="container-fluid">
-        <header>
-            <partial name="_Menu" />
-        </header>
-        <main role="main" class="container">
-           @RenderBody()
-        </main>
-        <footer class="rodape mt-4 border-top">
-            <h4>
-                &copy; @DateTime.Now.Year - Lanchonete
-            </h4>
+        <header >
+            <nav class="menu">
+                <partial name="_Menu" />
+            </nav>          
+    </header>
+    <main role="main">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+   
+    <section id="sobre">
+       <div class="sobre container">
+       <div class="texto-sobre">
+           <h3> O que é Lorem Ipsum?</h3>
+           <p>               
+                Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, 
+                quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu 
+                não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. 
+                Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou 
+                a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.
+           </p>
+       </div>
+           <div class="image-sobre">
+               <img src="~/images/carrossel/pizza-2661982_640.png"  />
+           </div>
+       </div>
+    </section>
+        <section>
+            <div class="carrossel">
+                <partial name="_Carrossel" />
+            </div>
+        </section>
+    <section id="contato">
+        <div class="contato container mt-5">
+        <div class="image-contato">
+            <h4>Fale conosco</h4>
+            
+            <img src="~/images//carrossel/call-8602325_1280.png" width="100%" />
+        </div>
+        <form class="form-control bg-light bg-opacity-100">
+            
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Seu nome">
+            </div> 
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="seuemail@email.com">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Mensagem</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-outline-success">Enviar</button>
+            </div>
+        </form>   
+        </div>
+    </section>
+
+   </div>
+    <footer class="container-fluid">
+        <div class="container rodape">
+            <div>
+                <h4>
+                    &copy; @DateTime.Now.Year - Lanchonete
+                </h4>
+            </div>
             <p>
                 Desenvolvido por <a href="https://github.com/fmarcelomorais" target="_blank"> Marcelo Morais</a>
             </p>
-        </footer>
-    </div>
+        </div>
+    </footer>
 
-   
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-    
+      
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

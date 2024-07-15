@@ -27,4 +27,8 @@
     <Folder Include="wwwroot\images\produtos\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\admin.js" />
+  </ItemGroup>
+
 </Project>

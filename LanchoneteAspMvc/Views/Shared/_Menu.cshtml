@@ -1,8 +1,9 @@
-﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-    <div class="container-fluid">
+﻿<div class="nav-menu container">
+
+<nav class="navbar navbar-expand-xl navbar-toggleable-sm navbar-light  mb-1">
+    <div class="container">
         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-            <i class="fa-solid fa-burger fa-bounce"></i>
-            Lanchonete            
+            <img src="~/images/carrossel/pizza-2661982_640.png" width="100" />            
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -17,10 +18,16 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Carrinho" asp-action="Index">Carrinho</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" >Os mais pedidos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Contato" asp-action="Index">Contato</a>
+                    <a class="nav-link text-dark" href="#sobre">Sobre Nós</a>
+                </li>
+                @* <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Carrinho" asp-action="Index">Carrinho</a>
+                </li> *@
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#contato" >Fale conosco</a>
                 </li>
                 <li class="nav-item align-content-center">
                     @await Component.InvokeAsync("CategoriaMenu")
@@ -36,3 +43,4 @@
       
     </div>
 </nav>
+</div>

@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Gráfico de Vendas";
+}
+
+<title>
+    @ViewData["Title"]
+</title>
+
+<h2>Gráfico de vendas Mensal</h2>
+<hr />
+<section class="container">
+    <div id="grafico"></div>
+</section>
+
+<script>
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(carregaDados);
+
+    async function carregaDados() {
+
+        const url = '@Url.Action("VendasLanches", "AdminGrafico", new { dias = 30 })';
+
+        const requisicao = await fetch(url)
+        const dados = await requisicao.json();
+   
+        let informacoesGrafico = [
+            ["Nome", "Quantidade", "Valores(R$)", { role: 'style' }]
+        ]
+        $.each(dados, (i, item) => {
+            informacoesGrafico.push([item.nome, item.quantidade, item.valorTotal, `color: #FFA${i}00`]);
+        });
+
+        geraGrafico(informacoesGrafico);
+
+    }
+
+    function geraGrafico(dados) {
+
+        if(!dados){
+            $("#graficos").html("<h2>Não há Dados</h2>")
+        }
+
+        let view = google.visualization.arrayToDataTable(dados);
+       
+       
+        const options = {
+            width: '100%',
+            height: '500',
+            bar: { groupWidth: '75%' },
+            isStacked: true,
+            'legend': 'left',
+            'is3D': true,
+            
+        }
+        
+        const grafico = new google.visualization.ColumnChart(document.getElementById("grafico"));
+
+        grafico.draw(view, options)
+
+    }
+</script>
+
+

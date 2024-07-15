@@ -5,36 +5,36 @@
 }
 
 
+<section class="section-catalogo container-fluid ">
 
-<h1>CATÁLOGO DE LANCHES </h1>
-<div class="mt-5 mb-5">
-    <partial name="_FormBuscaLanches" />
-</div>
-<hr />
-    <h3>@Model.CategoriaAtual</h3>
-<div class="catalogo">
+    <h1>CATÁLOGO DE LANCHES - @Model.CategoriaAtual </h1>
+    <div class="mt-5 mb-5">
+        <partial name="_FormBuscaLanches" />
+    </div>
+    <hr />
+    <div class="catalogo">
 
-        @if (Model.Lanches.Count < 1)
-        {
-            @if (@Model.CategoriaAtual.Any())
+            @if (Model.Lanches.Count < 1)
             {
-                <h3>Ainda Não há Lanches para Categoria @Model.CategoriaAtual :(</h3>
+                @if (@Model.CategoriaAtual.Any())
+                {
+                    <h3>Ainda Não há Lanches para Categoria @Model.CategoriaAtual :(</h3>
+                }
+                else
+                {                
+                    <h3>Nenhum lanche encontrado :(</h3>
+                }
             }
             else
-            {                
-                <h3>Nenhum lanche encontrado :(</h3>
-            }
-        }
-        else
-        {            
-            @foreach(var item in Model.Lanches)
-            {
+            {            
+                @foreach(var item in Model.Lanches)
+                {
                 
-               <partial name="_DetalhesLanche" for="@item" />    
+                   <partial name="_DetalhesLanche" for="@item" />    
               
+                }
             }
-        }
 
-</div>
-
+    </div>
+</section>
 

@@ -36,7 +36,8 @@ namespace LanchoneteAspMvc.Areas.Admin.Repositories
         }
         public async Task<bool> Put(Lanche lanche)
         {
-            _context.Entry(lanche).State = EntityState.Modified;
+            //_context.Entry(lanche).State = EntityState.Modified;
+            _context.Update(lanche);
             return await _context.SaveChangesAsync() == 1 ? true : false;
         }
 
